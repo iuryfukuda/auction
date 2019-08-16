@@ -1,11 +1,15 @@
-# AUCTION
+# Auction
 
 simple api for do or show oferted prices in auction ambient
 
-## DESCRIPTION
+## Requirements
 
-## USAGE
+- docker or go
 
-## BUILD
+## Description
 
-## TEST
+## Usage
+
+## Build
+
+## Test

@@ -1,4 +1,4 @@
-package handle
+package handles
 
 import (
 	"net/http"
@@ -22,4 +22,3 @@ func Bid(w http.ResponseWriter, r *http.Request) {
 
 	w.Write(d)
 }
-

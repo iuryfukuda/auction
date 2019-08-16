@@ -1,1 +1,5 @@
-go run main.go
+#!/bin/sh
+
+set -o errexit
+
+go run main.go $@
