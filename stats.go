@@ -1,7 +1,7 @@
-package main
+package auction
 
 import (
-	"enconnding/json"
+	_ "encoding/json"
 )
 
 type Stats struct {
