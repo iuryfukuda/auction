@@ -8,7 +8,7 @@ import (
 // Bid is the main abstraction about auction offer
 type Bid struct {
 	// ClientID is alphanumeric used to reference the client chosed
-	ClientID string	`json:"item_id"`
+	ClientID string	`json:"client_id"`
 
 	// Price is value of bid chosed
 	Price float64	`json:"price"`
@@ -17,12 +17,13 @@ type Bid struct {
 // BidData is the abstraction used in body of bid request
 type BidData struct {
 	Bid
-	// ClientID is alphanumeric used to reference id of client
-	ClientID string	`json:"client_id"`
+	// ItemID is alphanumeric used to reference id of item chosed
+	ItemID string	`json:"item_id"`
 }
 
-func (bd *BidData) ToBidDB() *BidDB {
-	return &BidDB{
+// ToBidDB is a easy way to add timestamp on data
+func (bd *BidData) ToBidDB() BidDB {
+	return BidDB{
 		bd.Bid,
 		time.Now().Unix(),
 	}

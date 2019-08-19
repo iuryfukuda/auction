@@ -8,7 +8,7 @@ import (
 )
 
 type Savior interface {
-	Save(bd models.BidData) error
+	Save(bd models.BidData)
 }
 
 type bid struct {

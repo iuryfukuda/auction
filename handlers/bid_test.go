@@ -12,7 +12,7 @@ import (
 )
 
 type fakeSavior struct{}
-func (fs *fakeSavior) Save(bd models.BidData) error { return nil }
+func (fs *fakeSavior) Save(bd models.BidData) {}
 
 type bidTest struct {
 	req	*http.Request
