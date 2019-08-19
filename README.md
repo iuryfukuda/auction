@@ -7,7 +7,7 @@ Api with the standard lib for do manage a auction oferted prices
 - docker or go
 
 ## Description
-```sh
+```
 ├── api
 │   └── server.go (save persistent data) 
 ├── db
