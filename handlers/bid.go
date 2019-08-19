@@ -4,20 +4,34 @@ import (
 	"net/http"
 	"encoding/json"
 
-	"github.com/iuryfukuda/auction/app"
+	"github.com/iuryfukuda/auction/models"
 )
 
-func Bid(w http.ResponseWriter, r *http.Request) {
+type Savior interface {
+	Save(bd models.BidData) error
+}
+
+type bid struct {
+	Savior
+}
+
+func NewBid(s Savior) *bid {
+	return &bid{s}
+}
+
+func (b *bid) Serve(w http.ResponseWriter, r *http.Request) {
+	setupHeaders(w)
 	d, ok := dataFromReq(w, r)
 	if !ok {
+		badRequest(w, "Missing body in request")
 		return
 	}
 
-	var bd app.BidData
+	var bd models.BidData
 	if err := json.Unmarshal(d, &bd); err != nil {
 		badRequest(w, err.Error())
 		return
 	}
 
-	w.Write(d)
+	b.Save(bd)
 }

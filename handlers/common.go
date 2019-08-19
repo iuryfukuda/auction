@@ -8,7 +8,6 @@ import (
 )
 
 func dataFromReq(w http.ResponseWriter, r *http.Request) (d []byte, ok bool) {
-	setupHeaders(w)
 	if r.Body == nil {
 		badRequest(w, "Body is Nil")
 		return

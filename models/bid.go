@@ -1,4 +1,4 @@
-package app
+package models
 
 import (
 	"time"
@@ -21,9 +21,16 @@ type BidData struct {
 	ClientID string	`json:"client_id"`
 }
 
-// BidStorage is the abstraction used to store bid
-type BidStorage struct {
+func (bd *BidData) ToBidDB() *BidDB {
+	return &BidDB{
+		bd.Bid,
+		time.Now().Unix(),
+	}
+}
+
+// BidDB is the abstraction used to store bid
+type BidDB struct {
 	Bid
 	// TimeStamp is the date of made bid in unix format
-	TimeStamp time.Time	`json:"timestamp"`
+	TimeStamp int64	`json:"timestamp"`
 }
