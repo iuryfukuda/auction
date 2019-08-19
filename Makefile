@@ -13,7 +13,7 @@ shell: image
 run:
 	$(run) ./start.sh $(args)
 
-check:
+test:
 ifeq ($(origin args), undefined)
 	$(run) go test ./...
 else
