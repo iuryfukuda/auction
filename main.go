@@ -8,5 +8,5 @@ import (
 
 func main() {
 	server := api.NewServer()
-	log.Fatal(server.Start(":3000"))
+	log.Fatal(server.Run(":3000"))
 }
