@@ -1,12 +1,14 @@
 package handlers
 
 import (
+	"fmt"
 	"strconv"
 	"net/http"
 	"io/ioutil"
 )
 
 func dataFromReq(w http.ResponseWriter, r *http.Request) (d []byte, ok bool) {
+	setupHeaders(w)
 	if r.Body == nil {
 		badRequest(w, "Body is Nil")
 		return
@@ -24,5 +26,10 @@ func dataFromReq(w http.ResponseWriter, r *http.Request) (d []byte, ok bool) {
 }
 
 func badRequest(w http.ResponseWriter, msg string) {
-	http.Error(w, strconv.Quote(msg), http.StatusBadRequest)
+	w.WriteHeader(http.StatusBadRequest)
+	fmt.Fprintln(w, strconv.Quote(msg))
+}
+
+func setupHeaders(w http.ResponseWriter) {
+	w.Header().Set("Content-Type", "application/json")
 }
