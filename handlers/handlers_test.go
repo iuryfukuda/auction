@@ -3,6 +3,7 @@ package handlers_test
 import (
 	"fmt"
 	"testing"
+	"strings"
 	"net/http"
     "net/http/httptest"
 
@@ -18,6 +19,12 @@ var handlersTests = []handlersTest{
 	handlersTest{
 		req: httptest.NewRequest(http.MethodGet, "/bid", nil),
 		code: http.StatusBadRequest,
+	},
+	handlersTest{
+		req: httptest.NewRequest(
+			http.MethodGet, "/bid", strings.NewReader(`{"item_id": "123", "price": 1.99, "client_id": "123"}`),
+		),
+		code: http.StatusOK,
 	},
 }
 
