@@ -9,19 +9,19 @@ import (
 
 type server struct {
 	mux	*http.ServeMux
-	db	*db.Mem
+	Db	*db.Mem
 }
 
 func NewServer() *server {
 	return &server{
 		mux: http.NewServeMux(),
-		db: db.NewMem(),
+		Db: db.NewMem(),
 	}
 }
 
 func (s *server) SetupHandlers() {
-	s.mux.HandleFunc("/bid", handlers.NewBid(s.db).Serve)
-	s.mux.HandleFunc("/stats", handlers.NewStats(s.db).Serve)
+	s.mux.HandleFunc("/bid", handlers.NewBid(s.Db).Serve)
+	s.mux.HandleFunc("/stats", handlers.NewStats(s.Db).Serve)
 }
 
 func (s *server) Start(port string) error {

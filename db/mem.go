@@ -1,54 +1,68 @@
 package db
 
 import (
-	_ "fmt"
+	"encoding/json"
 
 	"github.com/iuryfukuda/auction/models"
 )
 
-type bidDBN struct{
-	nHit	int
-	bidDB	models.BidDB
+type BidDBN struct{
+	NHit	int
+	BidDB	models.BidDB
 }
 
-type mItem map[string]bidDBN
+type MItem map[string]BidDBN
 
 type Mem struct {
-	mI	mItem
-	nBid	int
-	nHit	int
+	MI	MItem
+	NBid	int
+	NHit	int
 }
 
 func NewMem() *Mem {
-	return &Mem{make(mItem), 0, 0}
+	return &Mem{make(MItem), 0, 0}
 }
 
 func (m *Mem) Save(bd models.BidData) {
-	m.nBid++
-	item, ok := m.mI[bd.ItemID]
+	m.NBid++
+	item, ok := m.MI[bd.ItemID]
 
 	if !ok {
-		m.mI[bd.ItemID] = bidDBN{1, bd.ToBidDB()}
-		m.nHit++
+		m.MI[bd.ItemID] = BidDBN{1, bd.ToBidDB()}
+		m.NHit++
 		return
 	}
 
-	if bd.Price > item.bidDB.Price {
-		m.nHit++
-		item.nHit++
-		item.bidDB = bd.ToBidDB()
-		m.mI[bd.ItemID] = item
+	if bd.Price > item.BidDB.Price {
+		m.NHit++
+		item.NHit++
+		item.BidDB = bd.ToBidDB()
+		m.MI[bd.ItemID] = item
 	}
 }
 
 func (m *Mem) Check() models.Stats {
 	var bids = make([]models.Item, 0)
-	for k, bn := range m.mI {
-		bids = append(bids, models.Item{k, bn.nHit, bn.bidDB})
+	for k, bn := range m.MI {
+		bids = append(bids, models.Item{k, bn.NHit, bn.BidDB})
 	}
 	return models.Stats{
-		TotalBids: m.nBid,
-		TotalHits: m.nHit,
+		TotalBids: m.NBid,
+		TotalHits: m.NHit,
 		Bids: bids,
 	}
+}
+
+func (m *Mem) ToJSON() ([]byte, error) {
+	b, err := json.Marshal(m)
+	return b, err
+}
+
+func MemFromJSON(b []byte) (*Mem, error) {
+	var mem Mem
+	err := json.Unmarshal(b, &mem)
+	if err != nil {
+		return nil, err
+	}
+	return &mem, nil
 }

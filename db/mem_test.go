@@ -61,6 +61,22 @@ func TestDb(t *testing.T) {
 			t.Fatalf("[%d]: %s", i, err)
 		}
 	}
+	b1, err := MemDB.ToJSON()
+	if err != nil {
+		t.Fatal(err)
+	}
+	MemDB = db.NewMem()
+	MemDB, err = db.MemFromJSON(b1)
+	if err != nil {
+		t.Fatal(err)
+	}
+	b2, err := MemDB.ToJSON()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !reflect.DeepEqual(b1, b2) {
+		t.Fatalf("dump != restore: [%s] != [%s]", b1, b2)
+	}
 }
 
 func BenchmarkDb(b *testing.B) {
