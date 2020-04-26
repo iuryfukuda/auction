@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/iuryfukuda/auction/handlers"
-	"github.com/iuryfukuda/auction/db"
+	"github.com/zbioe/auction/handlers"
+	"github.com/zbioe/auction/db"
 )
 
 type server struct {

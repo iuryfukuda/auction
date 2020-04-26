@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"encoding/json"
 
-	"github.com/iuryfukuda/auction/models"
+	"github.com/zbioe/auction/models"
 )
 
 type Checker interface {

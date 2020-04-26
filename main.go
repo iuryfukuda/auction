@@ -7,8 +7,8 @@ import (
 	"io/ioutil"
 	"os/signal"
 
-	"github.com/iuryfukuda/auction/api"
-	"github.com/iuryfukuda/auction/db"
+	"github.com/zbioe/auction/api"
+	"github.com/zbioe/auction/db"
 )
 
 var dumpFilePath string

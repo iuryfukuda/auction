@@ -5,8 +5,8 @@ import (
 	"testing"
 	"reflect"
 
-	"github.com/iuryfukuda/auction/db"
-	"github.com/iuryfukuda/auction/models"
+	"github.com/zbioe/auction/db"
+	"github.com/zbioe/auction/models"
 )
 
 type dbTest struct {

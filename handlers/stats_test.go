@@ -8,8 +8,8 @@ import (
 	"encoding/json"
 	"net/http/httptest"
 
-	"github.com/iuryfukuda/auction/handlers"
-	"github.com/iuryfukuda/auction/models"
+	"github.com/zbioe/auction/handlers"
+	"github.com/zbioe/auction/models"
 )
 
 type fakeChecker struct{}

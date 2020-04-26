@@ -3,7 +3,7 @@ package db
 import (
 	"encoding/json"
 
-	"github.com/iuryfukuda/auction/models"
+	"github.com/zbioe/auction/models"
 )
 
 type BidDBN struct{
